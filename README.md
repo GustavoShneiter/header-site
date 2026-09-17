@@ -1,4 +1,14 @@
-# vinext-starter
+# Header Site — execução local
+
+O destino deste projeto é **http://localhost:5173**, no computador do usuário. Não publicar novamente no GPT Sites ou em outra hospedagem sem um novo pedido explícito. O GitHub guarda o código; o Supabase continua responsável pela conta e sincronização.
+
+No Windows, abra **Iniciar Header.cmd** com dois cliques. Ele inicia o servidor em segundo plano se necessário e abre o navegador. A pasta de trabalho é `E:\Projetos\header-web`.
+
+Para iniciar pelo terminal: execute `npm ci` na primeira instalação e depois `npm run dev`. Configure `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` em `.env.local`, que não é enviado ao GitHub. O servidor precisa estar ligado para acessar o localhost; a sincronização com a conta exige internet.
+
+A publicação antiga no Sites não é usada pelo localhost. O identificador em `.openai/hosting.json` foi preservado somente para identificar essa publicação; removê-lo não despublicaria o site remoto.
+
+## Documentação do framework original
 
 A clean full-stack starter running on [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and Drizzle support.
 
