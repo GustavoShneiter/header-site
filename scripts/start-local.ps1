@@ -1,7 +1,7 @@
 param([switch]$NoBrowser)
 $ErrorActionPreference = 'Stop'
 $projectPath = Split-Path -Parent $PSScriptRoot
-$localUrl = 'http://localhost:5173/'
+$localUrl = 'http://localhost:2000/'
 function Test-HeaderLocal {
     try {
         $response = Invoke-WebRequest -Uri $localUrl -UseBasicParsing -TimeoutSec 2

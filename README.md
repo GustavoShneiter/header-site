@@ -1,6 +1,6 @@
 # Header Site — execução local
 
-O destino deste projeto é **http://localhost:5173**, no computador do usuário. Não publicar novamente no GPT Sites ou em outra hospedagem sem um novo pedido explícito. O GitHub guarda o código; o Supabase continua responsável pela conta e sincronização.
+O destino deste projeto é **http://localhost:2000**, no computador do usuário. Não publicar novamente no GPT Sites ou em outra hospedagem sem um novo pedido explícito. O GitHub guarda o código; o Supabase continua responsável pela conta e sincronização.
 
 No Windows, abra **Iniciar Header.cmd** com dois cliques. Ele inicia o servidor em segundo plano se necessário e abre o navegador. A pasta de trabalho é `E:\Projetos\header-web`.
 
@@ -34,7 +34,7 @@ This starter does not use `wrangler.jsonc`.
 
 `scripts/sites-env.mjs` preserves the caller's HOME, npm cache, proxy, XDG, and temporary-directory configuration while defaulting Wrangler and Miniflare state to the checkout. If npm reports an unwritable cache, select a writable path with `npm_config_cache` for that install. The `dev` and `start` scripts also keep Wrangler logs inside the checkout. Generated `.sites-runtime/` and `.wrangler/` directories are disposable and ignored by Git.
 
-On portable, `npm run dev` uses `vinext dev` with HMR, starting at port 5173. Vinext records the running server in ignored `.vinext/` state, rejects an ordinary duplicate launch, and recovers stale state after a stopped process; exactly simultaneous starts can race. Pass `--port <port>` or `--hostname <host>` after `npm run dev --` when needed; keep portable previews on loopback.
+On portable, `npm run dev` uses `vinext dev` with HMR, starting at port 2000. Vinext records the running server in ignored `.vinext/` state, rejects an ordinary duplicate launch, and recovers stale state after a stopped process; exactly simultaneous starts can race. Pass `--port <port>` or `--hostname <host>` after `npm run dev --` when needed; keep portable previews on loopback.
 
 For browser QA on managed Linux, use `sites-preview start`. The project's dev script runs Vite and accepts the supervisor's `--host 0.0.0.0 --port 4173 --strictPort` arguments. The internal browser uses `http://terminal.local:4173/`; it is not a user-facing URL. The supervisor owns the preview lifecycle. The ignored local profile survives the supervisor's cleared process environment.
 
