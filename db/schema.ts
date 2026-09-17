@@ -1,0 +1,4 @@
+import { index, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+
+export const users = sqliteTable("users", { id: text("id").primaryKey(), displayName: text("display_name"), createdAt: integer("created_at", { mode: "timestamp" }).notNull() });
+export const tasks = sqliteTable("tasks", { id: text("id").primaryKey(), userId: text("user_id").notNull().references(() => users.id), parentId: text("parent_id"), title: text("title").notNull(), weekday: integer("weekday").notNull(), period: text("period").notNull(), completed: integer("completed", { mode: "boolean" }).notNull().default(false), position: integer("position").notNull().default(0), updatedAt: integer("updated_at", { mode: "timestamp" }).notNull() }, table => [index("idx_tasks_user_weekday").on(table.userId, table.weekday), index("idx_tasks_parent").on(table.parentId)]);
