@@ -44,18 +44,36 @@ create table if not exists public.header_challenges(
   archived boolean not null default false,
   created_at timestamptz not null default now()
 );
+create table if not exists public.header_finance_items(
+  id uuid primary key default gen_random_uuid(),
+  owner_id uuid not null references auth.users(id) on delete cascade,
+  kind text not null check (kind in ('income','bill','planned')),
+  title text not null check(char_length(title) between 1 and 240),
+  category text not null default '',
+  amount numeric(12,2) not null check(amount >= 0),
+  description text not null default '',
+  product_url text not null default '',
+  photo_url text not null default '',
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
 create index if not exists header_events_owner_date on public.header_events(owner_id,date);
 create index if not exists header_habits_owner on public.header_habits(owner_id);
 create index if not exists header_challenges_owner on public.header_challenges(owner_id);
+create index if not exists header_finance_items_owner_kind on public.header_finance_items(owner_id,kind);
 alter table public.header_events enable row level security;
 alter table public.header_habits enable row level security;
 alter table public.header_challenges enable row level security;
+alter table public.header_finance_items enable row level security;
 drop policy if exists "event owner" on public.header_events;
 create policy "event owner" on public.header_events for all to authenticated using(auth.uid()=owner_id) with check(auth.uid()=owner_id);
 drop policy if exists "habit owner" on public.header_habits;
 create policy "habit owner" on public.header_habits for all to authenticated using(auth.uid()=owner_id) with check(auth.uid()=owner_id);
 drop policy if exists "challenge owner" on public.header_challenges;
 create policy "challenge owner" on public.header_challenges for all to authenticated using(auth.uid()=owner_id) with check(auth.uid()=owner_id);
+drop policy if exists "finance owner" on public.header_finance_items;
+create policy "finance owner" on public.header_finance_items for all to authenticated using(auth.uid()=owner_id) with check(auth.uid()=owner_id);
 grant select,insert,update,delete on public.header_events,public.header_habits,public.header_challenges to authenticated;
+grant select,insert,update,delete on public.header_finance_items to authenticated;
 notify pgrst,'reload schema';
 commit;
